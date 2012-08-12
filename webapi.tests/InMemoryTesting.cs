@@ -60,7 +60,7 @@ namespace webapi.tests
         {
             var client = new HttpClient(_server);
             var newUrl = new Url() { Title = "Test post", Address = "http://www.strathweb.com", Description = "This is test post", CreatedAt = DateTime.Now, CreatedBy = "Filip", UrlId = 4 };
-            var request = createRequest("api/url/post?apikey=test", "application/json", HttpMethod.Post, newUrl, new JsonMediaTypeFormatter());
+            var request = createRequest("api/url/add?apikey=test", "application/json", HttpMethod.Post, newUrl, new JsonMediaTypeFormatter());
             var expectedJson = JsonConvert.SerializeObject(newUrl);
             //"{\"UrlId\":4,\"Address\":\"http://www.strathweb.com\",\"Title\":\"Test post\",\"Description\":\"This is test post\",\"CreatedAt\":\"2012-06-10T23:23:22.8292873+02:00\",\"CreatedBy\":\"Filip\"}"
 
@@ -95,7 +95,7 @@ namespace webapi.tests
         public void PostRemoveSingleUrl()
         {
             var client = new HttpClient(_server);
-            var request = createRequest("api/url/remove/1?apikey=test", "application/json", HttpMethod.Post);
+            var request = createRequest("api/url/delete/1?apikey=test", "application/json", HttpMethod.Delete);
             var expectedJson = "{\"UrlId\":1,\"Address\":\"http://www.strathweb.com/2012/03/build-facebook-style-infinite-scroll-with-knockout-js-and-last-fm-api/\",\"Title\":\"Build Facebook style infinite scroll with knockout.js and Last.fm API\",\"Description\":\"Since knockout.js is one of the most amazing and innovative pieces of front-end code I have seen in recent years, I hope this is going to help you a bit in your everday battles. In conjuction with Last.FM API, we are going to create an infinitely scrollable history of your music records – just like the infinite scroll used on Facebook or on Twitter.\",\"CreatedAt\":\"2012-03-20T00:00:00\",\"CreatedBy\":\"Filip\"}"; 
 
             using (HttpResponseMessage response = client.SendAsync(request, new CancellationTokenSource().Token).Result)

@@ -23,13 +23,13 @@ namespace webapi.inmemory.Controllers
             return urlRepo.Get(id);
         }
 
-        public Url Post(Url url)
+        [HttpPost]
+        public Url Add(Url url)
         {
             return urlRepo.Add(url);
         }
 
-        [HttpPost]
-        public Url Remove(int id)
+        public Url Delete(int id)
         {
             return urlRepo.Remove(id);
         }
